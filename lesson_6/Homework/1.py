@@ -1,4 +1,5 @@
 from pprint import pprint
+from typing import List, Dict
 
 tiesto = {
     "name": "Tiesto",
@@ -59,23 +60,40 @@ def add_dj(data):
     validated_data = validate_dj_data(dj_data)
 
     if validated_data is not None:
-        data.append(validated_data)
-        return validated_data
+        dj_data = {
+            "name": validated_data[0],
+            "age": validated_data[1],
+            "equipment": validated_data[2],
+            "discography": validated_data[3],
+            "salary": validated_data[4],
+            "genre": validated_data[5],
+        }
+        data.append(dj_data)
+        return dj_data
 
 
 def update_dj(data):
-    print("Update DJ's data by format: name,age,equipment,discography,salary,genre,male: ")
+    print("Update DJ's data by format: name,age,equipment,discography,salary,genre: ")
     update_input = input("Enter DJ's new data:")
     update_data = update_input.split(",")
     validated_data = validate_dj_data(update_data)
 
     if validated_data is not None:
-        data.append(validated_data)
-        return validated_data
+        update_dj_data = {
+            "name": validated_data[0],
+            "age": validated_data[1],
+            "equipment": validated_data[2],
+            "discography": validated_data[3],
+            "salary": validated_data[4],
+            "genre": validated_data[5],
+        }
+        data.append(update_dj_data)
+        return update_dj_data
 
 
 if __name__ == "__main__":
-    djs = [tiesto, avicci, anna]
+    djs: list[dict[str, int | str | bool] | dict[str, int | str | bool] | dict[str, int | str | bool]] = [tiesto,
+                                                                                                          avicci, anna]
     allowed_options = "[add/list/names/delete/update/exit/]"
 
     while True:
